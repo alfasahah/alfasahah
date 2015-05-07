@@ -1,5 +1,3 @@
 # alfasahah
 
-just checking
-
-check 2nd time
+This is the main project of alfasahah to serve the people with organized contents on web.
