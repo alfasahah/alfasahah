@@ -12,7 +12,7 @@ require('../includes/config.php');
 <head>
 </head>
 <body>
-	<form action="" method="POST" >
+	<form action="add_category_a.php" method="POST" >
 	<select name="section" data-rule-required="true" >
 		<option value="">-- Select Section --</option>
 		<?php while($row = mysqli_fetch_array($result)){ ?>
@@ -24,17 +24,3 @@ require('../includes/config.php');
 	</form>	
 </body>	
 </html>
-<?php	
-	if(empty($_POST) == false){
-		$cat_name=$_POST['cat_name'];
-		$sec_id = $_POST['section'];
-		$sql="INSERT INTO category (category_name,section_id) VALUES('$cat_name','$sec_id')";
-		if($con->query($sql)===TRUE) {
-			echo "New category added successfully";
-		}
-		else {
-			echo "Query Fail.";
-		}
-	}
-	$con->close();
-?>

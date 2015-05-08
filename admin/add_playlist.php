@@ -15,7 +15,7 @@ require('../includes/config.php');
 <head>
 </head>
 <body>
-	<form action='add_playlist.php' method="POST" >
+	<form action="add_playlist_a.php" method="POST" enctype="multipart/form-data" >
 <!-- playlist name -->
 		<div><label>Playlist Name</label>
 		<input type="text" name="playlist_name" >
@@ -72,28 +72,3 @@ require('../includes/config.php');
 	</form>	
 </body>
 </html>
-
-<?php	
-	if(empty($_POST) == false){
-		$playlist_name = $_POST['playlist_name'];
-		$sec_id = $_POST['section'];
-		$cat_id = $_POST['category'];
-		$featured = $_POST['featured'];
-		
-		$image_name=$playlist_name.'_'.$sec_id.'_'.$cat_id;
-		
-		$playlist_desc = $_POST['playlist_desc'];
-		$meta_title = $_POST['meta_title'];
-		$meta_desc = $_POST['meta_desc'];
-		$meta_keyword = $_POST['meta_keyword'];
-		
-		$sql="INSERT INTO playlist (playlist_name,section_id,category_id,featured,playlist_image,playlist_desc,meta_title,meta_desc,meta_keyword) VALUES ('$playlist_name','$sec_id','$cat_id','$featured','$image_name','$playlist_desc','$meta_title','$meta_desc','$meta_keyword')";
-		if($con->query($sql)===TRUE) {
-			echo "New playlist added successfully";
-		}
-		else {
-			echo "Query Fail.";
-		}
-	}
-	$con->close();	
-?>
