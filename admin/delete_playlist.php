@@ -1,7 +1,7 @@
 <?php
 require('../includes/config.php');
 
-$edit_id=$_GET['id'];
+$playlist_id=$_GET['id'];
 
 ?>
 
@@ -11,7 +11,7 @@ $edit_id=$_GET['id'];
 </head>
 <body>
 	<?php
-		$sql = "DELETE FROM playlist WHERE playlist_id=$edit_id";
+		$sql = "DELETE FROM playlist WHERE playlist_id=$playlist_id";
 		
 		if($con->query($sql)===TRUE) {
 			echo "Delete category successfully";

@@ -3,72 +3,99 @@ require('../includes/config.php');
 ?>
 
 <?php	
-	$sql_s = "SELECT section_id, section_name FROM section";
-	$result_s = mysqli_query($con,$sql_s);
-	
-	$sql_c = "SELECT category_id, category_name FROM category";
-	$result_c = mysqli_query($con,$sql_c);
+	$query_selectSection = "SELECT section_id, section_name FROM section";
+	$result_selectSection = $con->query($query_selectSection);
+	$query_selectCategory = "SELECT category_id, category_name FROM category";
+	$result_selectCategory = $con->query($query_selectCategory);
+	if($_SERVER['REQUEST_METHOD'] == "POST") {
+		$play_name = $section = $category = $featured = $image_path = $play_desc = $meta_title = $meta_desc = $meta_key = '';
+	}
+	$con->close();
 ?>
 
 <!doctype html>
 <html>
 <head>
+	<title>Add Playlist</title>
+	<link rel="stylesheet" href="../includes/main_style.css" >
 </head>
 <body>
-	<form action="add_playlist_a.php" method="POST" enctype="multipart/form-data" >
+	<?php
+		include("../includes/header_admin.inc.php");
+		include("../includes/nav_admin.inc.php");
+		include("../includes/aside_admin.inc.php");
+	?>
+	<section>
+		<h1>Add Playlist</h1>
+	<form action="" method="POST" enctype="multipart/form-data" class="form">
+	<ul class="form-list">
 <!-- playlist name -->
-		<div><label>Playlist Name</label>
-		<input type="text" name="playlist_name" >
-		</div>
+		<li>
+			<div class="label-block"> <label for="playName">Playlist Name</label> </div>
+			<div class="input-box"><input type="text" name="txtPlayName" id="playName" placeholder="Playlist Name" value="<?php echo $holder_playName; ?>" /> </div> <span class="error_message"><?php echo $err_playName; ?></span>
+		</li>
 <!-- section -->
-		<div><label>Section</label>
-		<select name="section" data-rule-required="true" >
-			<option value=""> -- Select Section -- </option>
-			<?php while($row_s = mysqli_fetch_array($result_s)){ ?>
-			<option value="<?php echo $row_s['section_id']; ?>"><?php echo $row_s['section_name']; ?></option>
-			<?php } ?>
-		</select>
-		</div>
+		<li>
+			<div class="label-block"> <label for="cmbSection">Section</label> </div>
+			<div class="input-box"><select name="cmbSection" data-rule-required="true" id="cmbSection">
+			<option value="" disabled selected>-- Select Section --</option>
+			<?php while($row_selectSection = $result_selectSection->fetch_array()){ ?>
+				<option value="<?php echo $row_selectSection['section_id']; ?>" <?php if($holder_sectionId == $row_selectSection['section_id']){ echo "selected";} ?>><?php echo $row_selectSection['section_name']; ?></option>
+			<?php } ?>  
+		</select></div> <span class="error_message"><?php echo $err_sectionId; ?></span>
+		</li>
 <!-- category -->
-		<div><label>Category</label>
-		<select name="category" data-rule-required="true" >
-			<option value=""> -- Select Category -- </option>
-			<?php while($row_c = mysqli_fetch_array($result_c)){// if($row_c['section_id']==$sec_id){?>
-			<option value="<?php echo $row_c['category_id']; ?>"><?php echo $row_c['category_name']; ?></option>
-			<?php }//} ?>  
-		</select>
-		</div>
+		<li>
+			<div class="label-block"> <label for="cmbCategory">Category</label> </div>
+			<div class="input-box"><select name="cmbCategory" data-rule-required="true" id="cmbCategory">
+			<option value="" disabled selected>-- Select Category --</option>
+			<?php while($row_selectCategory = $result_selectCategory->fetch_array()){ ?>
+				<option value="<?php echo $row_selectCategory['category_id']; ?>" <?php if($holder_categoryId == $row_selectCategory['category_id']){ echo "selected";} ?>><?php echo $row_selectCategory['category_name']; ?></option>
+			<?php } ?>  
+		</select></div> <span class="error_message"><?php echo $err_categoryId; ?></span>
+		</li>
 <!-- featured -->
-		<div><label>Featured</label>
-		<select name="featured" data-rule-required="true" >
+		<li>
+			<div class="label-block"> <label for="featured">Featured</label> </div>
+			<div class="input-box"><select name="featured" data-rule-required="true" id="featured">
 			<option value="0"> No </option>
 			<option value="1"> Yes </option>
-		</select>
-		</div>
+		</select></div>
+		</li>
 <!-- image -->
-		<div><label>Image</label>
-			<input type="file" name="image" id="image" >
-		</div>
+		<li>
+			<div class="label-block"> <label for="image">Image</label> </div>
+			<div class="input-box"><input type="file" name="image" id="image" /> </div> <span class="error_message"><?php echo $err_playName; ?></span>
+		</li>
 <!-- playlist desc -->
-		<div><label>playlist desc</label>
-			<textarea name="playlist_desc" id="elm1" rows="5" ></textarea>
-		</div>
+		<li>
+			<div class="label-block"> <label for="playDesc">Description</label> </div>
+			<div class="input-box"><textarea name="txtPlayDesc" id="playDesc" rows="5" placeholder="Description of Playlist" value="<?php echo $holder_playDesc; ?>"></textarea> </div>
+		</li>
 <!-- meta title -->
-		<div><label>meta title</label>
-			<textarea name="meta_title" id="elm1" rows="5" ></textarea>
-		</div>
+		<li>
+			<div class="label-block"> <label for="metaTitle">Meta Title</label> </div>
+			<div class="input-box"><textarea name="txtMetaTitle" id="metaTitle" rows="5" placeholder="Meta Title" value="<?php echo $holder_metaTitle; ?>"></textarea> </div>
+		</li>
 <!-- meta desc -->
-		<div><label>meta desc</label>
-			<textarea name="meta_desc" id="elm1" rows="5" ></textarea>
-		</div>
+		<li>
+			<div class="label-block"> <label for="metaDesc">Meta Description</label> </div>
+			<div class="input-box"><textarea name="txtMetaDesc" id="metaTitle" rows="5" placeholder="Meta Description" value="<?php echo $holder_metaDesc; ?>"></textarea> </div>
+		</li>
 <!-- meta keyword -->
-		<div><label>meta keyword</label>
-			<textarea name="meta_keyword" id="elm1" rows="5" ></textarea>
-		</div>
+		<li>
+			<div class="label-block"> <label for="metaKey">Meta Keywords</label> </div>
+			<div class="input-box"><textarea name="txtMetaKey" id="metaKey" rows="5" placeholder="Meta Keywords" value="<?php echo $holder_metaKey; ?>"></textarea> </div>
+		</li>
 <!-- submit -->
-		<div>
-		<input type="submit" value="Submit">
-		</div>
-	</form>	
+		<li>
+			<input type="submit" value="Add Playlist" class="submit_button" />
+		</li>
+	</ul>
+	</form>
+	</section>
+	<?php
+		include("../includes/footer_admin.inc.php");
+	?>
 </body>
 </html>
