@@ -57,7 +57,7 @@
 			<option value="" disabled selected>-- Select Section --</option>
 			<?php while($row_selectSection = $result_selectSection->fetch_array()){ ?>
 				<option value="<?php echo $row_selectSection['section_id']; ?>" <?php if($holder_sectionId == $row_selectSection['section_id']){ echo "selected";} ?>><?php echo $row_selectSection['section_name']; ?></option>
-			<?php } ?>  
+			<?php } ?>
 		</select></div> <span class="error_message"><?php echo $err_sectionId; ?></span>
 		</li>
 		<li>
