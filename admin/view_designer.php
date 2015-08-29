@@ -1,27 +1,27 @@
 <?php
 	require('../includes/config.php');
-	$query_selectChannel = "SELECT * FROM channel";
-	$result_selectChannel = $con->query($query_selectChannel);
+	$query_selectDesigner = "SELECT * FROM designer";
+	$result_selectDesigner = $con->query($query_selectDesigner);
 	if($_SERVER['REQUEST_METHOD'] == "POST") {
 			if(isset($_POST['chkId'])) {
 				$chkId = $_POST['chkId'];
-				$query_deleteChannel = $con->prepare("DELETE FROM channel WHERE channel_id = ?");
-				$query_deleteChannel->bind_param('i',$id);
+				$query_deleteDesigner = $con->prepare("DELETE FROM designer WHERE designer_id = ?");
+				$query_deleteDesigner->bind_param('i',$id);
 				foreach($chkId as $id) {
-					$result_deleteChannel = $query_deleteChannel->execute();
+					$result_deleteDesigner = $query_deleteDesigner->execute();
 				}
-				if(!$result_deleteChannel) {
-					echo "<script> alert(\"There was some problem deleting channel\"); </script>";
+				if(!$result_deleteDesigner) {
+					echo "<script> alert(\"There was some problem deleting Designer\"); </script>";
 					header('Refresh:0');
 				}
 				else {
-					$query_deleteChannel->close();
-					echo "<script> alert(\"Channel(s) Deleted Successfully\"); </script>";
+					$query_deleteDesigner->close();
+					echo "<script> alert(\"Designer(s) Deleted Successfully\"); </script>";
 					header('Refresh:0');
 				}
 			}
 			else {
-				echo "<script> alert(\"Please select atleast one channel to Delete\"); </script>";
+				echo "<script> alert(\"Please select atleast one Designer to Delete\"); </script>";
 				header('Refresh:0');
 			}
 		}
@@ -30,7 +30,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> View Channel </title>
+	<title> View Designer </title>
 	<link rel="stylesheet" href="../includes/main_style.css" >
 	<script language="JavaScript">
 		function toggle(source) {
@@ -53,30 +53,30 @@
 		include("../includes/aside_admin.inc.php");
 	?>
 	<section>
-		<h1>View Channel</h1>
-		<?php if($result_selectChannel->num_rows > 0){ ?>
+		<h1>View Designer</h1>
+		<?php if($result_selectDesigner->num_rows > 0){ ?>
 		<form action="" method="POST" class="form" id="formDelete">
 		<table class="table_displayData">
 			<tr>
 				<th> <input type="checkbox" onClick="toggle(this)" /> </th>
 				<th> Sr. No </th>
-				<th> Channel Name </th>
+				<th> Designer Name </th>
 				<th> Description </th>
 				<th> Edit </th>
 			</tr>
-			<?php $i=1; while($row_selectChannel = $result_selectChannel->fetch_array()){ ?>
+			<?php $i=1; while($row_selectDesigner = $result_selectDesigner->fetch_array()){ ?>
 			<tr>
-				<td> <input type="checkbox" name="chkId[]" value="<?php echo $row_selectChannel['channel_id']; ?>" id="chk[]" /> </td>
+				<td> <input type="checkbox" name="chkId[]" value="<?php echo $row_selectDesigner['designer_id']; ?>" id="chk[]" /> </td>
 				<td> <?php echo $i; ?> </td>
-				<td> <?php echo $row_selectChannel['channel_name']; ?> </td>
-				<td> <?php echo $row_selectChannel['channel_desc']; ?> </td>
-				<td> <a href="edit_channel.php?id=<?php echo $row_selectChannel['channel_id']; ?>"><img src="../images/edit.png" alt="edit" /></a> </td>
+				<td> <?php echo $row_selectDesigner['designer_name']; ?> </td>
+				<td> <?php echo $row_selectDesigner['designer_desc']; ?> </td>
+				<td> <a href="edit_designer.php?id=<?php echo $row_selectDesigner['designer_id']; ?>"><img src="../images/edit.png" alt="edit" /></a> </td>
 			</tr>
 			<?php $i++; } ?>
 		</table>
 		<input type="button" value="Delete" class="submit_button" onclick="clicked();"/>
 		</form>
-		<?php } else { echo "<h2>No Channel found</h2>"; } ?>
+		<?php } else { echo "<h2>No Designer found</h2>"; } ?>
 	</section>
 	<?php
 		include("../includes/footer_admin.inc.php");

@@ -1,19 +1,19 @@
 <?php
 require('../includes/config.php');
-$err_channelName = $err_image = $gen_error = '';
-$holder_channelName = $holder_channelDesc = '';
+$err_designerName = $err_image = $gen_error = '';
+$holder_designerName = $holder_designerDesc = '';
 if($_SERVER['REQUEST_METHOD'] == "POST") {
-    $channel_name = $channel_desc ='';
-    if(!empty($_POST['txtChannelName'])) {
-        $channel_name = trim($_POST['txtChannelName']);
-        $holder_channelName = trim($_POST['txtChannelName']);
+    $designer_name = $designer_desc ='';
+    if(!empty($_POST['txtDesignerName'])) {
+        $designer_name = trim($_POST['txtDesignerName']);
+        $holder_designerName = trim($_POST['txtDesignerName']);
     }
     else {
-        $err_channelName = "* required";
+        $err_designerName = "* required";
     }
-    $channel_desc = trim($_POST['txtChannelDesc']);
-    $holder_channelDesc = trim($_POST['txtChannelDesc']);
-    if($channel_name != NULL) {
+    $designer_desc = trim($_POST['txtDesignerDesc']);
+    $holder_designerDesc = trim($_POST['txtDesignerDesc']);
+    if($designer_name != NULL) {
         /*$query_InsertCategory="INSERT INTO category (category_name,section_id) VALUES('$cat_name','$section_id')";
         if($con->query($query_InsertCategory) === TRUE) {
             echo "<script>alert(\"New category added successfully\");</script>";
@@ -27,11 +27,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         if(!isset($_FILES['image']) || $_FILES['image']['error'] == UPLOAD_ERR_NO_FILE) {
             $image_name = NULL;
         } else {
-            $target_dir = "../images/images_channel/";
+            $target_dir = "../images/images_designer/";
             $target_file = $target_dir . basename($_FILES["image"]["name"]);
             $uploadOk = 1;
             $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-            $new_image_name = $target_dir . $channel_name . '.' . pathinfo($target_file,PATHINFO_EXTENSION);
+            $new_image_name = $target_dir . $designer_name . '.' . pathinfo($target_file,PATHINFO_EXTENSION);
             // Check if image file is a actual image or fake image
             if(isset($_POST["submit"])) {
                 $check = getimagesize($_FILES["image"]["tmp_name"]);
@@ -67,9 +67,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $new_image_name)) {
                     //echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
             
-            $image_name=$channel_name . "." .pathinfo($target_file,PATHINFO_EXTENSION);
-            /*$from_name = $channel_name . '.' . pathinfo($target_file,PATHINFO_EXTENSION);//$image_name;
-            $to_name = $channel_name . '.' . pathinfo($target_file,PATHINFO_EXTENSION);//$image_name;
+            $image_name=$designer_name . "." .pathinfo($target_file,PATHINFO_EXTENSION);
+            /*$from_name = $designer_name . '.' . pathinfo($target_file,PATHINFO_EXTENSION);//$image_name;
+            $to_name = $designer_name . '.' . pathinfo($target_file,PATHINFO_EXTENSION);//$image_name;
             // save to file (true) or output to browser (false)
             $save_to_file = true;
             // Quality for JPEG and PNG.
@@ -88,12 +88,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             $cut_y = 0;
             // Folder where source images are stored (thumbnails will be generated from these images).
             // MUST end with slash.
-            $images_folder = '../images/images_channel/';
+            $images_folder = '../images/images_designer/';
             // Folder to save thumbnails, full path from the root folder, MUST end with slash.
             // Only needed if you save generated thumbnails on the server.
             // Sample for windows:     c:/wwwroot/thumbs/
             // Sample for unix/linux:  /home/site.com/htdocs/thumbs/
-            $thumbs_folder = '../images/thumb_channel/';
+            $thumbs_folder = '../images/thumb_designer/';
             
             // include image processing code
             include('thumb_generator/image.class.php');
@@ -113,20 +113,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         }
 
         if($image_name != NULL) {
-            $sql="INSERT INTO channel (channel_name,channel_desc,channel_image) VALUES ('$channel_name','$channel_desc','$image_name')";
+            $sql="INSERT INTO designer (designer_name,designer_desc,designer_image) VALUES ('$designer_name','$designer_desc','$image_name')";
             if($con->query($sql)===TRUE) {
-                echo "<script> alert(\"Channel Added Successfully\"); </script>";
+                echo "<script> alert(\"Designer Added Successfully\"); </script>";
                 header('Refresh:0');
             }
             else {
                 echo "Query Fail.";
             } 
         }
+        
         else {
                 echo "<script> alert(\"Sorry, there was an error uploading your file.\"); </script>";
                 header('Refresh:0');
             }
-        
             }
             
             
@@ -143,7 +143,7 @@ $con->close();
 <!doctype html>
 <html>
 <head>
-    <title>Add Channel</title>
+    <title>Add Designer</title>
     <link rel="stylesheet" href="../includes/main_style.css" >
 </head>
 <body>
@@ -153,16 +153,16 @@ include("../includes/nav_admin.inc.php");
 include("../includes/aside_admin.inc.php");
 ?>
 <section>
-    <h1>Add Channel</h1>
+    <h1>Add Designer</h1>
     <form action="" method="POST" enctype="multipart/form-data" class="form">
         <ul class="form-list">
             <li>
-                <div class="label-block"> <label for="channelName">Channel Name</label> </div>
-                <div class="input-box"><input type="text" name="txtChannelName" id="channelName" placeholder="Channel Name *" value="<?php echo $holder_channelName; ?>" /> </div> <span class="error_message"><?php echo $err_channelName; ?></span>
+                <div class="label-block"> <label for="designerName">Designer Name</label> </div>
+                <div class="input-box"><input type="text" name="txtDesignerName" id="designerName" placeholder="Designer Name *" value="<?php echo $holder_designerName; ?>" /> </div> <span class="error_message"><?php echo $err_designerName; ?></span>
             </li>
             <li>
-                <div class="label-block"> <label for="channelDesc">Channel Description</label> </div>
-                <div class="input-box"><textarea name="txtChannelDesc" id="channelDesc"><?php echo $holder_channelDesc; ?></textarea></div>
+                <div class="label-block"> <label for="designerDesc">Designer Description</label> </div>
+                <div class="input-box"><textarea name="txtDesignerDesc" id="designerDesc"><?php echo $holder_designerDesc; ?></textarea></div>
             </li>
             <!-- image -->
             <li>
@@ -170,7 +170,7 @@ include("../includes/aside_admin.inc.php");
                 <div class="input-box"><input type="file" name="image" id="image" /> </div> <span class="error_message"><?php echo $err_image; ?></span>
             </li>
             <li>
-                <input type="submit" value="Add Channel" class="submit_button" /> <span class="error_message"><?php echo $gen_error; ?></span>
+                <input type="submit" value="Add Designer" class="submit_button" /> <span class="error_message"><?php echo $gen_error; ?></span>
             </li>
         </ul>
     </form>
