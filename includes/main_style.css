@@ -212,15 +212,20 @@ article h2 {
 }
 table {
 	border-collapse: collapse;
+	width:100%;
 }
 .table_displayData td, .table_displayData th {
-	border:1px solid #ddd;
+	border-top:1px solid #ddd;
 	padding: 8px 10px;
 	text-align: left;
 }
 .table_displayData th {
 	background-color:#eee;
 	color:#333;
+}
+td {
+	border-left: 0px none;
+	border-right: 0px none;
 }
 .table_invoiceFormat th {
 	background-color:#eee;

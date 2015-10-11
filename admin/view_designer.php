@@ -59,7 +59,7 @@
 		<table class="table_displayData">
 			<tr>
 				<th> <input type="checkbox" onClick="toggle(this)" /> </th>
-				<th> Sr. No </th>
+				<th> Image </th>
 				<th> Designer Name </th>
 				<th> Description </th>
 				<th> Edit </th>
@@ -67,7 +67,7 @@
 			<?php $i=1; while($row_selectDesigner = $result_selectDesigner->fetch_array()){ ?>
 			<tr>
 				<td> <input type="checkbox" name="chkId[]" value="<?php echo $row_selectDesigner['designer_id']; ?>" id="chk[]" /> </td>
-				<td> <?php echo $i; ?> </td>
+				 <td> <img src="../images/images_designer/<?php echo $row_selectDesigner['designer_image']; ?>" height="50px" width="50px"> </td>
 				<td> <?php echo $row_selectDesigner['designer_name']; ?> </td>
 				<td> <?php echo $row_selectDesigner['designer_desc']; ?> </td>
 				<td> <a href="edit_designer.php?id=<?php echo $row_selectDesigner['designer_id']; ?>"><img src="../images/edit.png" alt="edit" /></a> </td>

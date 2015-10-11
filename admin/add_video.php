@@ -3,7 +3,7 @@ require('../includes/config.php');
 ?>
 
 <?php
-	$query_selectSection = "SELECT section_id, section_name FROM section";
+	$query_selectSection = "SELECT section_id, section_name FROM section WHERE NOT (section_id=5)";
 	$result_selectSection = $con->query($query_selectSection);
 	$query_selectPlaylist = "SELECT playlist_id, playlist_name FROM playlist ORDER BY playlist_id DESC";
 	$result_selectPlaylist = $con->query($query_selectPlaylist);
@@ -87,6 +87,8 @@ $con->close();
 	<link rel="stylesheet" href="../includes/main_style.css" >
 </head>
 <body>
+	<script type="text/javascript" src="../includes/jquery.js"> </script>
+	<script type="text/javascript" src="select_playlist.js"> </script>
 	<?php
 		include("../includes/header_admin.inc.php");
 		include("../includes/nav_admin.inc.php");
@@ -124,18 +126,15 @@ $con->close();
 			<div class="input-box"><select name="cmbSection" data-rule-required="true" id="cmbSection">
 			<option value="" disabled selected>-- Select Section --</option>
 			<?php while($row_selectSection = $result_selectSection->fetch_array()){ ?>
-				<option value="<?php echo $row_selectSection['section_id']; ?>" <?php if($holder_section == $row_selectSection['section_id']){ echo "selected";} ?>><?php echo $row_selectSection['section_name']; ?></option>
+				<option value="<?php echo $row_selectSection['section_id']; ?>"><?php echo $row_selectSection['section_name']; ?></option>
 			<?php } ?>  
 		</select></div> <span class="error_message"><?php echo $err_section; ?></span>
 		</li>
 <!-- playlist -->
-		<li>
+ 		<li>
 			<div class="label-block"> <label for="cmbPlaylist">Playlist *</label> </div>
 			<div class="input-box"><select name="cmbPlaylist" data-rule-required="true" id="cmbPlaylist">
-			<option value="" disabled selected>-- Select Playlist --</option>
-			<?php while($row_selectPlaylist = $result_selectPlaylist->fetch_array()){ ?>
-				<option value="<?php echo $row_selectPlaylist['playlist_id']; ?>" <?php if($holder_playlist == $row_selectPlaylist['playlist_id']){ echo "selected";} ?>><?php echo $row_selectPlaylist['playlist_name']; ?></option>
-			<?php } ?>  
+			<option value="" disabled selected>Select Section to Activate</option>
 		</select></div> <span class="error_message"><?php echo $err_playlist; ?></span>
 		</li>
 <!-- Channel -->
@@ -178,5 +177,7 @@ $con->close();
 	<?php
 		include("../includes/footer_admin.inc.php");
 	?>
+	<script type="text/javascript" src="../includes/jquery.js"> </script>
+	<script type="text/javascript" src="select_playlist.js"> </script>
 </body>
 </html>

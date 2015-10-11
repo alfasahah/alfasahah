@@ -1,255 +1,130 @@
 <?php
-	include('includes/config.php');
-	$query_selectLatest = "SELECT playlist_id,playlist_image FROM playlist Group By playlist_id DESC Limit 5";
-	$result_selectLatest = $con->query($query_selectLatest);
+	include("includes/config.php");
+	$query_selectFeatured = "SELECT playlist_id,playlist_name,playlist_image FROM playlist WHERE featured=1 ORDER BY playlist_id DESC LIMIT 4";
+	$result_selectFeatured = $con->query($query_selectFeatured);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Al-Fasahah</title>
+		<title> Alfasahah Home </title>
 	<meta charset="utf-8">
-	<meta name="viewpoint" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	
-	<link rel="stylesheet" href="styles.css">
-
-	
-	
-	<style>
-  
-  
-  </style>
-		
-	</head>
-
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap.min.css">
+	<script src="bootstrap-3.3.4-dist/js/jquery.js"></script>
+	<script src="bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="main_style.css">
+</head>
 <body>
+	<?php include('includes/body_top.inc.php'); ?> <!-- body_top.inc.php file contains script to be added in the starting part of <body> tag. -->
+	<!-- Header Image & Navigation Bar -->
+	<?php include("includes/header_nav.inc.php"); ?>
 
-<header class="container-fluid">
-	<a href="#"><img src="new_title.png" class="img-responsive"></a>
-	</header>
-	
-	<div class="container-fluid">
-		<div class="row">
-			<div class="">
-				
-			
-				<nav class="navbar navbar-inverse " role="navigation">
-					<div class="container">		
-						
-						<!--Navigation Bar Header-->
-						
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-target="#mainNavbar" data-toggle="collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span></button>
-								<a href="#" class="navbar-brand" style="color:white">Al-Fasahah</a>
-									<!--<p>An Exploring Truth</p>-->			
-						</div>
-						
-							<!--Main navigation-->
-						
-						<div class="collapse navbar-collapse" id="mainNavbar">
-							<ul class="nav navbar-nav navbar-right">
-							<li class="active"><a href="#" style="color:white">Home</a></li>
-							<li><a href="#" style="color:white">Movies</a></lgi>				
-							<li><a href="#" style="color:white">Documentaries</a></li>				
-							<li><a href="#" style="color:white">Lectures</a></li>				
-							<li><a href="#" style="color:white">Kids</a></li>				
-							<li><a href="#" style="color:white">Audio Books</a></li>				
-							<li><a href="#" style="color:white">Gallery</a></li>				
-							<li><a href="#" style="color:white">Contact</a></li>				
-							</ul>
-							<!--<ul class="nav navbar-nav navbar-right">
-							<li><a href="#"><span class="glyphicon glyphicon-log-in pull-right"> Login </span></a></li>
-							</ul>-->
-						</div>
-					</div>		
-				</nav>
-			
-			</div>			
-		</div>
-	</div>
-		<header id="myslider" class="carousel slide" data-ride="carousel"> 
+	<!-- Carousel Slider -->
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
 		<ol class="carousel-indicators">
-			<li data-target="#myslider" data-slide-to="0" class="active"></li>
-			<li data-target="#myslider" data-slide-to="1"></li>
-			<li data-target="#myslider" data-slide-to="2"></li>
-			<li data-target="#myslider" data-slide-to="3"></li>
-			<li data-target="#myslider" data-slide-to="4"></li>
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+			<li data-target="#myCarousel" data-slide-to="4"></li>
 		</ol>
-		
-		<div class="carousel-inner">
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<a href="#"><img src="1.jpg" class="img-hover"></a>
-				<!--<div class="carousel-caption"></div>-->
+			  <img src="images/slider_images/1.gif" alt="Islamic Movies" class="img-responsive">
 			</div>
 			<div class="item">
-				<a href="#"><img src="2.jpg" class="img-hover"></a>
-				<!--<div class="carousel-caption"></div>-->
+			  <img src="images/slider_images/2.jpg" alt="Documentaries" class="img-responsive">
 			</div>
 			<div class="item">
-				<a href="#"><img src="3.jpg" class="img-hover"></a>
-				<!--<div class="carousel-caption"></div>-->
+			  <img src="images/slider_images/3.jpg" alt="Lectures" class="img-responsive">
 			</div>
 			<div class="item">
-				<a href="#"><img src="4.jpg" class="img-hover"></a>
-				<!--<div class="carousel-caption"></div>-->
+			  <img src="images/slider_images/2.jpg" alt="Audio Books" class="img-responsive">
 			</div>
 			<div class="item">
-				<a href="#"><img src="5.jpg" class="img-hover"></a>
-				<!--<div class="carousel-caption"></div>-->
+			  <img src="images/slider_images/3.jpg" alt="Kids" class="img-responsive">
 			</div>
 		</div>
-		
-		
-		<a class="carousel-control left" href="#myslider" data-slide="prev">
-			<span class="glyphicon glyphicon-menu-left"></span>
+		<!-- Left and right controls -->
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
 		</a>
-		<a class="carousel-control right" href="#myslider" data-slide="next">
-			<span class="glyphicon glyphicon-menu-right"></span>
+	  	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
 		</a>
-		
-</header><br>
-	
-<div class="container">			
-		<div class="row">
-			<div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-check"></i> Latest News</h4>
-                    </div>
-                    <div class="panel-body">
-                        <ol>
-							<li><a href="#">Breaking News 1</a></li>							
-							<li><a href="#">Breaking News 2</a></li>							
-							<li><a href="#">Breaking News 3</a></li>							
-							<li><a href="#">Breaking News 4</a></li>							
-							<li><a href="#">Breaking News 5</a></li>
-						</ol>					
-					</div>
-                </div>
-				<!--<div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-check"></i>Usefull Links</h4>
-                    </div>
-                    <div class="panel-body">
-                        <ul>
-							<li><a href="#">Islamic Mobility</a></li>							
-							<li><a href="#">Shiatv</a></li>							
-							<li><a href="#">Duas.org</a></li>							
-							<li><a href="#">Al-Islam</a></li>							
-							<li><a href="#">Islami Markaz</a></li>
-						</ul>						
-                    </div>
-                </div>-->  		
-				
-			
-			</div>
-			
-			<div class="col-md-9">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4><i href=" #" class="fa fa-fw fa-check"></i> Latest Videos</h4>
-                    </div>
-                    <div class="panel-body" >
-						
-						<?php
-							while($row_selectLatest = $result_selectLatest->fetch_array()) { ?>
-								<div class="col-md-3 col-sm-6 col-xs-12">
-								<a href="#">
-								<img class="img-responsive img-portfolio img-hover" src="images/images_playlist/<?php echo $row_selectLatest['playlist_image']; ?>" alt="">
-								</a>
-								</div>	
-						<?php }
-						?>
-							
-						
-					</div>
-                </div>							
-			</div>
-			
-		</div>
-</div>
+	</div>
 
-<div class="container">		
+	<!-- Main & Sidebar Container -->
+	<div class="container content_wrapper">
 		<div class="row">
-			<div class="col-md-3">
-				<div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-check"></i>Usefull Links</h4>
-                    </div>
-                    <div class="panel-body">
-                        <ul>
-							<li><a href="#">Islamic Mobility</a></li>							
-							<li><a href="#">Shiatv</a></li>							
-							<li><a href="#">Duas.org</a></li>							
-							<li><a href="#">Al-Islam</a></li>							
-							<li><a href="#">Islami Markaz</a></li>
-						</ul>						
-                    </div>
-                </div>
-			</div>
-			<div class="col-md-9">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h4 style="font-family:myriad pro">Featured Videos</h4>
-					</div>
-					<div class="panel-body">
-						
-						<div class="col-md-3 col-sm-6">
-							<div class="embed-responsive embed-responsive-16by9">
-								<iframe class="embed-responsive-item" src="http://www.youtube.com/embed/r9uWCPpC4po"></iframe>
-							</div>
-						</div>	
-						<div class="col-md-3 col-sm-6">
-							<div class="embed-responsive embed-responsive-16by9">
-								<iframe class="embed-responsive-item" src="http://www.youtube.com/embed/r9uWCPpC4po"></iframe>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6">
-							<div class="embed-responsive embed-responsive-16by9">
-								<iframe class="embed-responsive-item" src="http://www.youtube.com/embed/r9uWCPpC4po"></iframe>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6">
-							<div class="embed-responsive embed-responsive-16by9">
-								<iframe class="embed-responsive-item" src="http://www.youtube.com/embed/r9uWCPpC4po"></iframe>
-							</div>
-						</div>	
+			
+			<!-- Sidebar -->
+			<?php include("includes/sidebar_home.inc.php"); ?>
+
+			<!-- Main Content -->
+			<div class="col-md-9 col-sm-9">
+				<div class="section-header">
+					<h4 class="section-title">Featured Videos</h4>
+				</div>
+				<div class="section-content">
+					<div class="row">
+						<?php
+							while($row_selectFeatured = $result_selectFeatured->fetch_array()) {
+						?>
+						<div class="col-md-3 col-sm-6"><a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Penguins.jpg" alt="">
+							<h5><?php echo $row_selectFeatured['playlist_name']; ?></h5></a></div>
+						<?php } ?>
 					</div>
 				</div>
-			</div>				
+				<div class="section-header">
+					<h4 class="section-title">Latest Videos</h4>
+				</div>
+				<div class="section-content">
+					<div class="row">
+						<div class="col-md-3 col-sm-6"><a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Desert.jpg" alt="">
+							<h5>Mukhtar Nama</h5></a></div>
+						<div class="col-md-3 col-sm-6">	<a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Koala.jpg" alt="">
+							<h5>Prophet Yousuf (s.a)</h5></a></div>
+						<div class="col-md-3 col-sm-6">	<a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Penguins.jpg" alt="">
+							<h5>Muhammad</h5></a></div>
+						<div class="col-md-3 col-sm-6">	<a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Lighthouse.jpg" alt="">
+							<h5>Sulaiman</h5></a></div>
+					</div>
+				</div>
+				<div class="section-header">
+					<h4 class="section-title">Featured Channels</h4>
+				</div>
+				<div class="section-content">
+					<div class="row">
+						<div class="col-md-3 col-sm-6"><a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Penguins.jpg" alt="">
+							<h5>Sahar Tv</h5></a></div>
+						<div class="col-md-3 col-sm-6">	<a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Lighthouse.jpg" alt="">
+							<h5>Al-Balagh</h5></a></div>
+						<div class="col-md-3 col-sm-6">	<a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Desert.jpg" alt="">
+							<h5>Al-Fasahah</h5></a></div>
+						<div class="col-md-3 col-sm-6">	<a href="#">
+								<img class="img-responsive img-portfolio img-hover" src="images/check/Koala.jpg" alt="">
+							<h5>AhlulBayt Tv</h5></a></div>
+					</div>
+				</div>
+			</div>
 		</div>
-</div>	
-<footer style="background-color:#2E2E2E">
-	<div class="container">
-		<p style="text-align:center" class="text-primary"><a href="Al-fasahah-home.html" class="text-success"><br>Al-Fasahah Oragnization</a><i> is founded to provide a source of education to facilitate understanding studying, sharing and preserving all relevant media, cultural material,
-                    		  literature, speeches, discussions, debates, & talks. We aim to promote education and understanding of the Truth.
-                                             </i></p>   <p style="text-align:center" class="text-danger">Copyright © 2013 alfasahah.com. All rights reserved.</p>
 	</div>
-</footer>
-	
+
+	<!-- Footer -->
+	<?php include("includes/footer_main.inc.php"); ?>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

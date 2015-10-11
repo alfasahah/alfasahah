@@ -45,6 +45,12 @@
 			}
 		}
 	</script>
+	<style>
+	td {
+		border-left: 0px none;
+		border-right: 0px none;
+	}
+	</style>
 </head>
 <body>
 	<?php
@@ -59,22 +65,22 @@
 		<table class="table_displayData">
 			<tr>
 				<th> <input type="checkbox" onClick="toggle(this)" /> </th>
-				<th> Sr. No </th>
+				<th> Image </th>
 				<th> Channel Name </th>
 				<th> Description </th>
-				<th> Edit </th>
+				<th> Edit </th> 
 			</tr>
 			<?php $i=1; while($row_selectChannel = $result_selectChannel->fetch_array()){ ?>
 			<tr>
 				<td> <input type="checkbox" name="chkId[]" value="<?php echo $row_selectChannel['channel_id']; ?>" id="chk[]" /> </td>
-				<td> <?php echo $i; ?> </td>
+				<td> <img src="../images/images_channel/<?php echo $row_selectChannel['channel_image']; ?>" height="50px" width="50px"> </td>
 				<td> <?php echo $row_selectChannel['channel_name']; ?> </td>
 				<td> <?php echo $row_selectChannel['channel_desc']; ?> </td>
 				<td> <a href="edit_channel.php?id=<?php echo $row_selectChannel['channel_id']; ?>"><img src="../images/edit.png" alt="edit" /></a> </td>
 			</tr>
 			<?php $i++; } ?>
 		</table>
-		<input type="button" value="Delete" class="submit_button" onclick="clicked();"/>
+		<input type="button" value="Delete" class="submit_button" onclick="clicked();" style="margin:0px;margin-left:10px;"/>
 		</form>
 		<?php } else { echo "<h2>No Channel found</h2>"; } ?>
 	</section>

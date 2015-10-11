@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2015 at 12:29 PM
+-- Generation Time: Oct 11, 2015 at 06:07 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -57,14 +57,14 @@ CREATE TABLE IF NOT EXISTS `channel` (
   `channel_desc` varchar(1000) DEFAULT NULL,
   `channel_image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`channel_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `channel`
 --
 
 INSERT INTO `channel` (`channel_id`, `channel_name`, `channel_desc`, `channel_image`) VALUES
-(1, 'Al Balagh', 'Al Balagh an Urdu channel', 'Mukhtar Nama.jpg'),
+(1, 'Al Balagh', 'Al Balagh an Urdu channel', 'albalagh.jpg'),
 (3, 'Sahar Tv', 'Sahar Tv Urdu Channel for News', 'Sahar Tv.jpg');
 
 -- --------------------------------------------------------
@@ -79,14 +79,14 @@ CREATE TABLE IF NOT EXISTS `designer` (
   `designer_desc` varchar(1000) DEFAULT NULL,
   `designer_image` varchar(1000) NOT NULL,
   PRIMARY KEY (`designer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `designer`
 --
 
 INSERT INTO `designer` (`designer_id`, `designer_name`, `designer_desc`, `designer_image`) VALUES
-(1, 'Al Fasahah', 'www.alfasahah.com', '');
+(1, 'Al Fasahah', 'www.alfasahah.com', 'alfasahah.jpg');
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,16 @@ CREATE TABLE IF NOT EXISTS `photos` (
   PRIMARY KEY (`photo_id`),
   KEY `designer_id` (`designer_id`),
   KEY `playlist_id` (`playlist_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `photos`
+--
+
+INSERT INTO `photos` (`photo_id`, `photo_name`, `download_url`, `thumb_url`, `size`, `language`, `designer_id`, `playlist_id`, `meta_title`, `meta_desc`, `meta_keyword`) VALUES
+(1, 'hey1', 'hey1', 'thumb_URL', '10x8', 'ENGLISH', 1, 4, 'chekc1', 'meta_descssdsds1', 'dsfdsfs'),
+(2, 'skjdfkslf', 'lksdfjklsd', 'jflksdjlk', '4x3', 'URDU', 1, 4, '', 'meta_desc', 'meta_keyword'),
+(3, 'check', 'asdsadas', 'dsadsad', '10x8', 'ENGLISH', 1, 4, 'check', 'check', 'check');
 
 -- --------------------------------------------------------
 
@@ -131,15 +140,19 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   PRIMARY KEY (`playlist_id`),
   KEY `section_id` (`section_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `playlist`
 --
 
 INSERT INTO `playlist` (`playlist_id`, `playlist_name`, `playlist_image`, `playlist_desc`, `featured`, `section_id`, `category_id`, `meta_title`, `meta_desc`, `meta_keyword`) VALUES
-(1, 'Mukhtar Nama', 'Mukhtar Nama_2_2.png', 'sdadasdsadsadasdasd', 1, 2, 2, 'asdsadsa', 'dasdsad', 'sadasdas'),
-(2, 'Ruhullah', 'Ruhullah_1_4.jpg', 'Check', 1, 1, 4, 'meta title', 'meta description', 'meta keywords');
+(1, 'Mukhtar Nama', 'Mukhtar Nama_2_2.png', 'Mokhtarnameh is an epic television series produced by Sima film, based on the life of Mukhtar Thaqafi. Mukhtar Thaqafi is a Shiite Muslim leader who sets up a rebellion movement in 686 A.D in the town of Kufa to avenge the martyrdom of Hussein (grandson of Islamic Prophet Muhammad).', 1, 2, 2, 'asdsadsa', 'dasdsad', 'sadasdas'),
+(2, 'Ruhullah', 'Ruhullah_1_4.jpg', 'Check', 1, 1, 4, 'meta title', 'meta description', 'meta keywords'),
+(3, 'check', 'check_2_2.png', '', 0, 2, 2, '', '', ''),
+(4, 'Ramadhan', '', 'Wallpapers on Maahe Ramadhan', 1, 5, 1, NULL, NULL, NULL),
+(5, 'Ashabe Kahf', 'Mukhtar Nama_2_2.jpg', 'This is ththhthththt Dedsfhskjfh', 1, 2, 4, NULL, NULL, NULL),
+(6, 'Mukhtar Nama', 'Mukhtar Nama_2_2.png', 'sdadasdsadsadasdasd', 0, 2, 4, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -199,15 +212,17 @@ CREATE TABLE IF NOT EXISTS `videos` (
   PRIMARY KEY (`video_id`),
   KEY `playlist_id` (`playlist_id`),
   KEY `channel_id` (`channel_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `videos`
 --
 
 INSERT INTO `videos` (`video_id`, `video_name`, `embed_code`, `language`, `featured`, `playlist_id`, `channel_id`, `meta_title`, `meta_desc`, `meta_keyword`) VALUES
-(5, 'Mukhtar Nama Episode-1', 'code of the video', 'URDU', 1, 1, 1, 'ch', 'ds', 'er'),
-(6, 'Mukhtar Nama Episode-2', 'code of the video', 'URDU', 1, 1, 1, '', '', '');
+(5, 'Mukhtar Nama Episode-1', 'h5Feo41t8PY', 'URDU', 1, 1, 1, 'ch', 'ds', 'er'),
+(6, 'Mukhtar Nama Episode-2', 'd64tgm1bdFc', 'URDU', 1, 1, 1, '', '', ''),
+(7, 'check', 'dsfdsf', 'URDU', 1, 2, 1, '', '', ''),
+(8, 'vvvv', 'sds', 'ENGLISH', 1, 1, 3, '', '', '');
 
 --
 -- Constraints for dumped tables
